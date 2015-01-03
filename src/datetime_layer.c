@@ -59,9 +59,18 @@ void time_layer_update()
 
 void date_layer_update(struct tm *tick_time)
 {
-  // Update the date - Without a leading 0 on the day of the month
-  strftime(date_text, sizeof(date_text), "%d.%m.", tick_time);
-  text_layer_set_text(date_layer, date_text);
+	// Update the date - Without a leading 0 on the day of the month
+	char day_text[7];
+	char * date_start = day_text;
+
+	strftime(day_text, sizeof(day_text), "%d %b", tick_time);
+
+	//remove initial zero
+	if (day_text[0] == '0')
+		date_start++;
+
+	snprintf(date_text, sizeof(date_text), "%s", date_start);
+	text_layer_set_text(date_layer, date_text);
 }
 
 void time_layer_destroy() 
