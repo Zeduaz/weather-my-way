@@ -60,7 +60,7 @@ void time_layer_update()
 void date_layer_update(struct tm *tick_time)
 {
   // Update the date - Without a leading 0 on the day of the month
-  strftime(date_text, sizeof(date_text), "%e/%m", tick_time);
+  strftime(date_text, sizeof(date_text), "%d.%m.", tick_time);
   text_layer_set_text(date_layer, date_text);
 }
 
